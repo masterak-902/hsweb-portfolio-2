@@ -1,27 +1,53 @@
-import type { Handlers, PageProps } from "$fresh/server.ts";
+import type { Handlers } from "$fresh/server.ts";
 import { getCookies } from "https://deno.land/std@0.224.0/http/cookie.ts";
 
 interface Data {
     isAllowed: boolean;
   }
-  
-export const handler: Handlers<Data> = {
+
+//   Add <Login> and logout to index
+// export const handler: Handlers<Data> = {
+//     GET(req, ctx) {
+//         const cookies = getCookies(req.headers);
+
+//         return ctx.render!({ isAllowed: cookies.auth === "bar" });
+//     },
+// };
+
+// export default function Home({ data }: PageProps<Data>) {
+//     return (
+//         <div class="flex flex-col p-8">
+
+//             {data.isAllowed ? "Here is some secret" : "You are not allowed here"}
+            
+//             <a href="/logout">Logout</a>
+        
+//         </div>
+//     );
+// }
+
+//   Handle non-logged-in users
+export const handler: Handlers = {
     GET(req, ctx) {
-        const cookies = getCookies(req.headers);
-
-        return ctx.render!({ isAllowed: cookies.auth === "bar" });
+      const cookies = getCookies(req.headers);
+      if (cookies.auth === "bar") {
+        return ctx.render!();
+      } else {
+        const url = new URL(req.url);
+        url.pathname = "/login";
+        return Response.redirect(url);
+      }
     },
-};
+  };
 
-export default function Home({ data }: PageProps<Data>) {
+
+export default function Home() {
     return (
         <div class="flex flex-col p-8">
+            Here is some secret
 
-            {data.isAllowed ? "Here is some secret" : "You are not allowed here"}
-            
             <a href="/logout">Logout</a>
-        
         </div>
     );
-}
+  }
   
