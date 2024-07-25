@@ -1,4 +1,23 @@
 import LoginForm from "../islands/LoginForm.tsx";
+import type { Handlers } from "$fresh/server.ts";
+import { getCookies } from "$std/http/cookie.ts";
+
+
+//すでにログインしている場合はダッシュボードにリダイレクト
+//FIX: もしcookies.authが存在する場合は、/dashboardにリダイレクトされるが、authが一致しない場合は/loginに戻されて、循環してしまう。
+export const handler: Handlers = {
+    GET(req, ctx) {
+        const cookies = getCookies(req.headers);
+
+        if (!cookies.auth) {
+            return ctx.render!();
+        } else {
+            const url = new URL(req.url);
+            url.pathname = "/dashboard";
+            return Response.redirect(url);
+        }
+    },
+};
 
 export default function Home() {
     return(

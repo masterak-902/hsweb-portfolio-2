@@ -1,8 +1,5 @@
-// ここの処理はHonoを使って変更予定
-
 import { Handlers } from "$fresh/server.ts";
-import { setCookie } from "https://deno.land/std@0.224.0/http/cookie.ts";
-
+import { setCookie } from "$std/http/cookie.ts";
 export const handler: Handlers = {
     async POST(req) {
         const url = new URL(req.url);
@@ -10,7 +7,7 @@ export const handler: Handlers = {
         const form = await req.formData();
         console.log(form);
 
-        if (form.get("username") === "guest" && form.get("password") === "password") {
+        if (form.get("username") === "user" && form.get("password") === "password") {
             const headers = new Headers();
 
             setCookie(headers, {
@@ -21,11 +18,12 @@ export const handler: Handlers = {
             domain: url.hostname,
             path: "/",
             secure: true,
+            httpOnly: true, // ensures the cookie is not accessible via JavaScript
             });
 
             headers.set("location", "/dashboard");
             return new Response(null, {
-                status: 303, // "See Other"
+                status: 303,
                 headers,
                 });
 

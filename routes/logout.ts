@@ -1,5 +1,5 @@
 import { Handlers } from "$fresh/server.ts";
-import { deleteCookie } from "https://deno.land/std@0.224.0/http/cookie.ts";
+import { deleteCookie } from "$std/http/cookie.ts";
 
 export const handler: Handlers = {
   GET(req) {
