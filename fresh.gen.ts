@@ -8,6 +8,7 @@ import * as $api_login from "./routes/api/login.ts";
 import * as $dashboard_path_ from "./routes/dashboard/[...path].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $login from "./routes/login.tsx";
+import * as $login_error from "./routes/login_error.tsx";
 import * as $logout from "./routes/logout.ts";
 import * as $ContactForm from "./islands/ContactForm.tsx";
 import * as $LoginForm from "./islands/LoginForm.tsx";
@@ -21,6 +22,7 @@ const manifest = {
     "./routes/dashboard/[...path].tsx": $dashboard_path_,
     "./routes/index.tsx": $index,
     "./routes/login.tsx": $login,
+    "./routes/login_error.tsx": $login_error,
     "./routes/logout.ts": $logout,
   },
   islands: {
