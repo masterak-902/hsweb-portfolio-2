@@ -5,18 +5,23 @@ interface Data {
     isAllowed: boolean;
   }
   
-  export default function Home({ data }: PageProps<Data>) {
-    return (
-      <div>
-        {data.isAllowed ? "Here is some secret" : "You are not allowed here"}
-      </div>
-    );
-  }
-  
-  export const handler: Handlers<Data> = {
+export const handler: Handlers<Data> = {
     GET(req, ctx) {
-      const cookies = getCookies(req.headers);
-  
-      return ctx.render!({ isAllowed: cookies.auth === "bar" });
+        const cookies = getCookies(req.headers);
+
+        return ctx.render!({ isAllowed: cookies.auth === "bar" });
     },
-  };
+};
+
+export default function Home({ data }: PageProps<Data>) {
+    return (
+        <div class="flex flex-col p-8">
+
+            {data.isAllowed ? "Here is some secret" : "You are not allowed here"}
+            
+            <a href="/logout">Logout</a>
+        
+        </div>
+    );
+}
+  
