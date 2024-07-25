@@ -7,7 +7,7 @@ export const handler: Handlers = {
         const form = await req.formData();
         console.log(form);
 
-        if (form.get("username") === "user" && form.get("password") === "password") {
+        if (form.get("username") === "guest" && form.get("password") === "password") {
             const headers = new Headers();
 
             setCookie(headers, {
