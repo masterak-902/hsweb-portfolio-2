@@ -2,7 +2,7 @@ import { Button } from "../components/Button.tsx";
 
 export default function ContactForm() {
     return (
-        <form class="bg-slate-100 mt-8 py-6 px-8 max-w-[760px] h-auto mx-auto rounded drop-shadow">
+        <form method="post" action="/api/send_message.ts" class="bg-slate-100 mt-8 py-6 px-8 max-w-[760px] h-auto mx-auto rounded drop-shadow">
             <h2 class="text-2xl mb-4 text-center font-bold">お問い合わせフォーム</h2>
             <div class="flex flex-col">
                 <label class="mb-2" for="email">メールアドレス</label>
