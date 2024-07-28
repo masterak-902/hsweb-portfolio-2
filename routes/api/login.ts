@@ -3,11 +3,11 @@ import { setCookie } from "$std/http/cookie.ts";
 export const handler: Handlers = {
     async POST(req) {
         const url = new URL(req.url);
-        //本来はここにデータベースとの接続処理を書く
+        //本来はここにミドルウェアとの接続処理を書く
         const form = await req.formData();
         console.log(form);
 
-        if (form.get("username") === "user" && form.get("password") === "password") {
+        if (form.get("username") === "guest" && form.get("password") === "password") {
             const headers = new Headers();
 
             setCookie(headers, {
