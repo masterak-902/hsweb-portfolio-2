@@ -3,7 +3,9 @@ import { setCookie } from "$std/http/cookie.ts";
 export const handler: Handlers = {
     async POST(req) {
         const url = new URL(req.url);
-        //本来はここにデータベースとの接続処理を書く
+        // 本来はここにミドルウェアとの接続処理を書く
+        //Fetch method: post
+        // https://docs.deno.com/runtime/tutorials/fetch_data/
         const form = await req.formData();
         console.log(form);
 
@@ -29,8 +31,8 @@ export const handler: Handlers = {
 
         } else {
             const headers = new Headers();
-            //エラーコード303はリダイレクトを示す
-            //エラーコード401は認証エラーを示す
+            // エラーコード303はリダイレクトを示す
+            // エラーコード401は認証エラーを示す
             headers.set("location", "/login_error");
             return new Response(null, {
                 status: 303,
