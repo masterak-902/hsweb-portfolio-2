@@ -41,34 +41,23 @@ export const handler: Handlers = {
         headers.set('Authorization', 'Basic ' + btoa(`${form.get('username')}:${form.get('password')}`));
 
         // 4. Execute await fetch(*url*/api/login) with try-catch
-        try {
-            const response = await fetch('http://localhost:8787/api/login', { method: 'POST', headers, });
-            if (response.ok) {
-                const token = await response.json();
-                sessionStorage.setItem('jwt', token);
 
-                // 5_TEST. To validate the set token, send a GET request to the (*url*/api/access), receive a message and output it to the console log.
-                const accessResponse = await fetch('http://localhost:8787/api/access', { headers: { Authorization: `Bearer ${token}` } });
-                if (accessResponse.ok) {
-                    console.log(accessResponse.json());
-                }
+        const response = await fetch('http://localhost:8787/api/login', { method: 'GET', headers, });
+        if (response.ok) {
+            const token = await response.json();
+            sessionStorage.setItem('jwt', token);
 
-                return new Response(null, {
-                    status: 303,
-                    headers: new Headers({
-                        location: '/dashboard',
-                    }),
-                });
-            } else {
-                return new Response(null, {
-                    status: 303,
-                    headers: new Headers({
-                        location: '/login_error',
-                    }),
-                });
-            }
-        } catch (error) {
-            console.error(error);
+            // 5_TEST. To validate the set token, send a GET request to the (*url*/api/access), receive a message and output it to the console log.
+            const accessResponse = await fetch('http://localhost:8787/api/access', { method: 'GET', headers: { Authorization: `Bearer ${token}` } });
+            console.log(accessResponse.json());
+
+            return new Response(null, {
+                status: 303,
+                headers: new Headers({
+                    location: '/dashboard',
+                }),
+            });
+        } else {
             return new Response(null, {
                 status: 303,
                 headers: new Headers({
