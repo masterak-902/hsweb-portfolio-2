@@ -1,12 +1,12 @@
 import { Handlers } from "$fresh/server.ts";
-import { deleteCookie } from "$std/http/cookie.ts";
+
 
 export const handler: Handlers = {
   GET(req) {
-    const url = new URL(req.url);
-    const headers = new Headers(req.headers);
-    deleteCookie(headers, "auth", { path: "/", domain: url.hostname });
+    // Destruction of session storage
+    sessionStorage.removeItem("jwt");
 
+    const headers = new Headers(req.headers);
     headers.set("location", "/login");
     return new Response(null, {
       status: 302,

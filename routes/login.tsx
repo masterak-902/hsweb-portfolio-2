@@ -1,23 +1,22 @@
 import LoginForm from "../islands/LoginForm.tsx";
-import type { Handlers } from "$fresh/server.ts";
-import { getCookies } from "$std/http/cookie.ts";
 
 
-//すでにログインしている場合はダッシュボードにリダイレクト
-export const handler: Handlers = {
-    
-    GET(req, ctx) {
-        const cookies = getCookies(req.headers);
 
-        if (!cookies.auth) {
-            return ctx.render!();
-        } else {
-            const url = new URL(req.url);
-            url.pathname = "/dashboard";
-            return Response.redirect(url);
-        }
-    },
-};
+// 1. Verify that you have valid session storage
+// import type { Handlers } from "$fresh/server.ts";
+// import { getCookies } from "$std/http/cookie.ts";
+// export const handler: Handlers = {
+//     GET(req, ctx) {
+//         const cookies = getCookies(req.headers);
+//         if (!cookies.auth) {
+//             return ctx.render!();
+//         } else {
+//             const url = new URL(req.url);
+//             url.pathname = "/dashboard";
+//             return Response.redirect(url);
+//         }
+//     },
+// };
 
 export default function Home() {
     return(

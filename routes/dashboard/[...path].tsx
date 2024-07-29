@@ -1,5 +1,5 @@
-import type { Handlers } from "$fresh/server.ts";
-import { getCookies } from "$std/http/cookie.ts";
+// import type { Handlers } from "$fresh/server.ts";
+// import { getCookies } from "$std/http/cookie.ts";
 
 // interface Data {
 //     isAllowed: boolean;
@@ -21,25 +21,25 @@ import { getCookies } from "$std/http/cookie.ts";
 // }
 
 //   Handle non-logged-in users
-export const handler: Handlers = {
-    GET(req, ctx) {
-      const cookies = getCookies(req.headers);
-      if (cookies.auth === "bar") {
-        return ctx.render!();
-      } else {
-        const url = new URL(req.url);
-        url.pathname = "/login";
-        return Response.redirect(url);
-      }
-    },
-  };
+// export const handler: Handlers = {
+//     GET(req, ctx) {
+//       const cookies = getCookies(req.headers);
+//       if (cookies.auth === "bar") {
+//         return ctx.render!();
+//       } else {
+//         const url = new URL(req.url);
+//         url.pathname = "/login";
+//         return Response.redirect(url);
+//       }
+//     },
+//   };
 
 
 export default function Home() {
+  const token = sessionStorage.getItem("jwt");
     return (
         <div class="flex flex-col p-8">
-            Here is some secret
-
+             <p>{token}</p>
             <a href="/logout">Logout</a>
         </div>
     );
