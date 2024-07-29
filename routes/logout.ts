@@ -1,6 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { deleteCookie } from "$std/http/cookie.ts";
 
+// Destruction of session storage
 export const handler: Handlers = {
   GET(req) {
     const url = new URL(req.url);
