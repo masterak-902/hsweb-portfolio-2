@@ -35,37 +35,42 @@ export const handler: Handlers = {
             // Hono API
             // --------------------------------------------------------------
             
+            // TEST RESPOMSE
+            return new Response(JSON.stringify({ isSuccessful: true, message: 'お問い合わせを受け付けました。' }));
+
             // 1. form.entries(): retrieve all entries (key/value pairs) of a form object.
             // 2. Object.fromEntries(form.entries()): converts the retrieved entries into objects.
             // 3. JSON.stringify(Object.fromEntries(form.entries())): converts the object into a string in JSON format.
-            const json = JSON.stringify(Object.fromEntries(form.entries()));
 
-            const headers = new Headers();
-            const apikey = Deno.env.get('POST_API_KEY');
+            // const json = JSON.stringify(Object.fromEntries(form.entries()));
+
+            // const headers = new Headers();
+            // const apikey = Deno.env.get('POST_API_KEY');
         
-            headers.set('X-API-KEY', apikey ?? '');
-            headers.set('Content-Type', 'application/json');
+            // headers.set('X-API-KEY', apikey ?? '');
+            // headers.set('Content-Type', 'application/json');
 
-            const response = await fetch('http://localhost:8787/sender', {
-                method: 'POST',
-                headers,
-                body: json,
-            });
+            // const response = await fetch('http://localhost:8787/sender', {
+            //     method: 'POST',
+            //     headers,
+            //     body: json,
+            // });
             
-            try {
-                responseData = await response.json();
-                // console.log(responseData);
-                return new Response(JSON.stringify(responseData), {
-                    headers: { 'Content-Type': 'application/json' },
-                });
-                // return new Response(null, {});
 
-            // deno-lint-ignore no-unused-vars
-            } catch (error) {
-                // console.error(error);
-                // return new Response(error);
-                return new Response(null, {'status': 403});
-            }
+            // try {
+            //     responseData = await response.json();
+            //     // console.log(responseData);
+            //     return new Response(JSON.stringify(responseData), {
+            //         headers: { 'Content-Type': 'application/json' },
+            //     });
+            //     // return new Response(null, {});
+
+            // // deno-lint-ignore no-unused-vars
+            // } catch (error) {
+            //     // console.error(error);
+            //     // return new Response(error);
+            //     return new Response(null, {'status': 403});
+            // }
         } else {
             // console.error('Error:', outcome['error-codes']);
             responseData = { isSuccessful: false,  message: 'トークンの有効期限が切れているまたは、認証に失敗しました。'};
