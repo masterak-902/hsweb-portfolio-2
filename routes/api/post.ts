@@ -1,6 +1,3 @@
-// Fetch POST method in Deno
-// GET .env POST_API_KEY
-
 import { Handlers } from '$fresh/server.ts';
 
 export const handler: Handlers = {
@@ -34,6 +31,10 @@ export const handler: Handlers = {
         const outcome = await result.json();
         let responseData;
         if (outcome.success) {
+            // --------------------------------------------------------------
+            // Hono API
+            // --------------------------------------------------------------
+            
             // 1. form.entries(): retrieve all entries (key/value pairs) of a form object.
             // 2. Object.fromEntries(form.entries()): converts the retrieved entries into objects.
             // 3. JSON.stringify(Object.fromEntries(form.entries())): converts the object into a string in JSON format.
@@ -45,7 +46,6 @@ export const handler: Handlers = {
             headers.set('X-API-KEY', apikey ?? '');
             headers.set('Content-Type', 'application/json');
 
-            // Hono API(/sender)へfetchの実行
             const response = await fetch('http://localhost:8787/sender', {
                 method: 'POST',
                 headers,
@@ -54,7 +54,7 @@ export const handler: Handlers = {
             
             try {
                 responseData = await response.json();
-                console.log(responseData);
+                // console.log(responseData);
                 return new Response(JSON.stringify(responseData), {
                     headers: { 'Content-Type': 'application/json' },
                 });
@@ -67,14 +67,12 @@ export const handler: Handlers = {
                 return new Response(null, {'status': 403});
             }
         } else {
-            console.error('Error:', outcome['error-codes']);
-            // responseData = { isSuccessful: false,  message: 'トークンの有効期限が切れているまたは、認証に失敗しました。'};
-            // return new Response(JSON.stringify(responseData), {
-            //     headers: { 'Content-Type': 'application/json' },
-            // });
-            return new Response(null, {});
+            // console.error('Error:', outcome['error-codes']);
+            responseData = { isSuccessful: false,  message: 'トークンの有効期限が切れているまたは、認証に失敗しました。'};
+            return new Response(JSON.stringify(responseData), {
+                headers: { 'Content-Type': 'application/json' },
+            });
         }
-
     }  
 }
 
