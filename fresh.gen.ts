@@ -7,6 +7,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $api_login from "./routes/api/login.ts";
 import * as $api_post from "./routes/api/post.ts";
 import * as $dashboard_path_ from "./routes/dashboard/[...path].tsx";
+import * as $dashboard_middleware from "./routes/dashboard/_middleware.ts";
 import * as $index from "./routes/index.tsx";
 import * as $login from "./routes/login.tsx";
 import * as $login_error from "./routes/login_error.tsx";
@@ -22,6 +23,7 @@ const manifest = {
     "./routes/api/login.ts": $api_login,
     "./routes/api/post.ts": $api_post,
     "./routes/dashboard/[...path].tsx": $dashboard_path_,
+    "./routes/dashboard/_middleware.ts": $dashboard_middleware,
     "./routes/index.tsx": $index,
     "./routes/login.tsx": $login,
     "./routes/login_error.tsx": $login_error,
