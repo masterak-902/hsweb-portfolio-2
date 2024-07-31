@@ -1,4 +1,4 @@
-import { Handlers, type PageProps } from "$fresh/server.ts";
+import { Handlers, type PageProps } from '$fresh/server.ts';
 
 interface Props {
     message: string | null;
@@ -25,7 +25,7 @@ export const handler: Handlers<Props> = {
     
         const form = await req.formData();
 
-        // Turnstile injects a token in "cf-turnstile-response".
+        // Turnstile injects a token in 'cf-turnstile-response'.
         const turnstile_token = form.get('cf-turnstile-response');
         const ip = req.headers.get('CF-Connecting-IP');
 
@@ -62,11 +62,12 @@ export const handler: Handlers<Props> = {
 
             const headers = new Headers();
             const apikey = Deno.env.get('POST_API_KEY');
+            const send_url = Deno.env.get('POST_API_URL');
         
             headers.set('X-API-KEY', apikey ?? '');
             headers.set('Content-Type', 'application/json');
 
-            const response = await fetch('http://localhost:8787/sender', {
+            const response = await fetch(send_url ? send_url : '', {
                 method: 'POST',
                 headers,
                 body: json,
@@ -104,20 +105,20 @@ export default function ContactForm(props: PageProps<Props>) {
 
     return (
         <>
-            <form method="POST" class="flex flex-col bg-slate-100 mt-8 mb-8 py-6 px-8 max-w-[760px] h-auto mx-auto rounded drop-shadow">
-                <h2 class="text-2xl mb-4 text-center font-bold">お問い合わせフォーム</h2>
-                <label class="mb-2" for="email">メールアドレス</label>
-                <input class="mb-4 p-2" type="email" id="email" name="email" />
-                <label class="mb-2" for="message">お問い合わせ内容</label>
-                <textarea class="resize-none mb-4 p-2"  rows={15} id="message" name="message"></textarea>
-                <div class="checkbox mb-3 text-center">
+            <form method='POST' class='flex flex-col bg-slate-100 mt-8 mb-8 py-6 px-8 max-w-[760px] h-auto mx-auto rounded drop-shadow'>
+                <h2 class='text-2xl mb-4 text-center font-bold'>お問い合わせフォーム</h2>
+                <label class='mb-2' for='email'>メールアドレス</label>
+                <input class='mb-4 p-2' type='email' id='email' name='email' />
+                <label class='mb-2' for='message'>お問い合わせ内容</label>
+                <textarea class='resize-none mb-4 p-2'  rows={15} id='message' name='message'></textarea>
+                <div class='checkbox mb-3 text-center'>
                     {/* <!-- The following line controls and configures the Turnstile widget. --> */}
-                    <div class="cf-turnstile" data-sitekey={sitekey} data-theme="light"></div>
+                    <div class='cf-turnstile' data-sitekey={sitekey} data-theme='light'></div>
                     {/* <!-- end. --> */}
                 </div>
 
                 {/* Set to 'disable' until CloudFlare Turnstile resolves */}
-                <button disabled={isSuccessful} type="submit" class="text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors">送信</button>
+                <button disabled={isSuccessful} type='submit' class='text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors'>送信</button>
                 {message ? <p class={`text-center mt-4 ${isSuccessful ? 'text-blue-500' : 'text-red-500'}`}>{message}</p> : null}
                 
             </form>

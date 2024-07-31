@@ -10,8 +10,8 @@
 
 // // This middle layer provides login authentication and token management.
 
-// // import type { Handlers } from "$fresh/server.ts";
-// // import { getCookies } from "$std/http/cookie.ts";
+// // import type { Handlers } from '$fresh/server.ts';
+// // import { getCookies } from '$std/http/cookie.ts';
 
 // // interface Data {
 // //     isAllowed: boolean;
@@ -20,14 +20,14 @@
 // // export const handler: Handlers<Data> = {
 // //     GET(req, ctx) {
 // //         const cookies = getCookies(req.headers);
-// //         return ctx.render!({ isAllowed: cookies.auth === "bar" });
+// //         return ctx.render!({ isAllowed: cookies.auth === 'bar' });
 // //     },
 // // };
 // // export default function Home({ data }: PageProps<Data>) {
 // //     return (
-// //         <div class="flex flex-col p-8">
-// //             {data.isAllowed ? "Here is some secret" : "You are not allowed here"}
-// //             <a href="/logout">Logout</a>
+// //         <div class='flex flex-col p-8'>
+// //             {data.isAllowed ? 'Here is some secret' : 'You are not allowed here'}
+// //             <a href='/logout'>Logout</a>
 // //         </div>
 // //     );
 // // }
@@ -36,11 +36,11 @@
 // // export const handler: Handlers = {
 // //     GET(req, ctx) {
 // //       const cookies = getCookies(req.headers);
-// //       if (cookies.auth === "bar") {
+// //       if (cookies.auth === 'bar') {
 // //         return ctx.render!();
 // //       } else {
 // //         const url = new URL(req.url);
-// //         url.pathname = "/login";
+// //         url.pathname = '/login';
 // //         return Response.redirect(url);
 // //       }
 // //     },
