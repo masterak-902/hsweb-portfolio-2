@@ -116,13 +116,10 @@ export default function ContactForm(props: PageProps<Props>) {
                     <div class='cf-turnstile' data-sitekey={sitekey} data-theme='light'></div>
                     {/* <!-- end. --> */}
                 </div>
-
                 {/* Set to 'disable' until CloudFlare Turnstile resolves */}
-                <button disabled={isSuccessful} type='submit' class='text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors'>送信</button>
+                <button disabled={isSuccessful} type='submit' class={'text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors'}>送信</button>
                 {message ? <p class={`text-center mt-4 ${isSuccessful ? 'text-blue-500' : 'text-red-500'}`}>{message}</p> : null}
-                
-            </form>
-            
+            </form>  
         </>
     )
 }
