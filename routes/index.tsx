@@ -2,14 +2,14 @@ import { Handlers, type PageProps } from "$fresh/server.ts";
 
 interface Props {
     message: string | null;
-    isSubmitted: boolean;
+    isSuccessful: boolean;
   }
 
 export const handler: Handlers<Props> = {
 
     // deno-lint-ignore no-unused-vars
     async GET(req, ctx) {
-      return await ctx.render({ message: null, isSubmitted: false });
+      return await ctx.render({ message: null, isSuccessful: false });
     },
 
     // 1. Define POST action from contact form
@@ -72,13 +72,13 @@ export const handler: Handlers<Props> = {
                 body: json,
             });
 
-            let responseData;
+            let responseData:Props;
 
             try {
                 responseData = await response.json();
                 // console.log(responseData);
 
-                return await ctx.render({ message: responseData.message, isSubmitted: true });
+                return await ctx.render({ message: responseData.message, isSuccessful: responseData.isSuccessful });
 
             // deno-lint-ignore no-unused-vars
             } catch (error) {
@@ -92,14 +92,14 @@ export const handler: Handlers<Props> = {
             const json = JSON.stringify({ message: '認証に失敗しました。' });
             const parsedJson = JSON.parse(json);
             
-            return await ctx.render({ message: parsedJson.message, isSubmitted: false });
+            return await ctx.render({ message: parsedJson.message, isSuccessful: false });
         }
     }  
 };
 
 export default function ContactForm(props: PageProps<Props>) {
     const { message } = props.data;
-    const { isSubmitted } = props.data;
+    const { isSuccessful } = props.data;
     const sitekey = Deno.env.get('RECAPTCHA_SITE_KEY');
 
     return (
@@ -117,8 +117,8 @@ export default function ContactForm(props: PageProps<Props>) {
                 </div>
 
                 {/* Set to 'disable' until CloudFlare Turnstile resolves */}
-                <button disabled={isSubmitted} type="submit" class="text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors">送信</button>
-                {message ? <p class={`text-center mt-4 ${isSubmitted ? 'text-blue-500' : 'text-red-500'}`}>{message}</p> : null}
+                <button disabled={isSuccessful} type="submit" class="text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors">送信</button>
+                {message ? <p class={`text-center mt-4 ${isSuccessful ? 'text-blue-500' : 'text-red-500'}`}>{message}</p> : null}
                 
             </form>
             
