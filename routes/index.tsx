@@ -117,8 +117,8 @@ export default function ContactForm(props: PageProps<Props>) {
                     {/* <!-- end. --> */}
                 </div>
                 {/* Set to 'disable' until CloudFlare Turnstile resolves */}
-                <button disabled={isSuccessful} type='submit' class={'text-center w-[300px] mx-auto px-2 py-2 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors'}>送信</button>
-                {message ? <p class={`text-center mt-4 ${isSuccessful ? 'text-blue-500' : 'text-red-500'}`}>{message}</p> : null}
+                <button disabled={isSuccessful} type='submit' class={`text-center w-[300px] mx-auto px-2 py-2 border-2 rounded transition-colors ${isSuccessful ? 'bg-gray-400 border-gray-400 cursor-not-allowed' : 'bg-white border-gray-400 hover:bg-gray-200'}`}>送信</button>
+                {message ? <p class={`text-center mt-3 text-lg ${isSuccessful ? 'text-blue-500' : 'text-red-500'}`}>{message}</p> : null}
             </form>  
         </>
     )
