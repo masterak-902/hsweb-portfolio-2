@@ -2,7 +2,6 @@ export default function ContactForm() {
     const sitekey = Deno.env.get('RECAPTCHA_SITE_KEY');
 
     return (
-
         <form method="POST" action="/api/post" class="flex flex-col bg-slate-100 mt-8 mb-8 py-6 px-8 max-w-[760px] h-auto mx-auto rounded drop-shadow">
             <h2 class="text-2xl mb-4 text-center font-bold">お問い合わせフォーム</h2>
             <label class="mb-2" for="email">メールアドレス</label>
