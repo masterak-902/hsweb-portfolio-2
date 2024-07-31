@@ -1,10 +1,8 @@
 export default function ContactForm() {
     const sitekey = Deno.env.get('RECAPTCHA_SITE_KEY');
 
-    // Display the results of accessing the Hono API.
-    
-
     return (
+
         <form method="POST" action="/api/post" class="flex flex-col bg-slate-100 mt-8 mb-8 py-6 px-8 max-w-[760px] h-auto mx-auto rounded drop-shadow">
             <h2 class="text-2xl mb-4 text-center font-bold">お問い合わせフォーム</h2>
             <label class="mb-2" for="email">メールアドレス</label>
@@ -18,7 +16,7 @@ export default function ContactForm() {
             </div>
 
             {/* Set to 'disable' until CloudFlare Turnstile resolves */}
-            <button type="submit" class="text-center w-1/4 mx-auto px-2 py-1 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors">送信</button>
+            <button type="submit" class="text-center w-[300px] mx-auto px-2 py-1 border-gray-400 border-2 rounded bg-white hover:bg-gray-200 transition-colors">送信</button>
         </form>
     )
 }
